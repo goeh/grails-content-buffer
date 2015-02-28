@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 class ContentBufferGrailsPlugin {
-    // the plugin version
-    def version = "1.0.1"
+    def version = "1.0.2"
     def license = "APACHE"
-    // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "1.2.0 > *"
-    // the other plugins this plugin depends on
+    def grailsVersion = "2.0.0 > *"
     def dependsOn = [:]
-    // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/controllers/**/*",
         "grails-app/views/**/*"
     ]
-
     def author = "Goran Ehrsson"
     def authorEmail = "goran@technipelago.se"
     def title = "GSP Content Buffer"
@@ -36,10 +31,7 @@ It is used to insert page fragments anywhere in a GSP before it is rendered.
 The standard sitemesh content tag does not support appending content, this plugin does.
 Templates included with the render tag can also append content to sections in the layout.
 '''
-
-    // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/content-buffer"
-
     def organization = [name: "Technipelago AB", url: "http://www.technipelago.se/"]
     def issueManagement = [system: "github", url: "https://github.com/goeh/grails-content-buffer/issues"]
     def scm = [url: "https://github.com/goeh/grails-content-buffer"]

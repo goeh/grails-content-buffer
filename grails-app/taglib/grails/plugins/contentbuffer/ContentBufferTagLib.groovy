@@ -15,12 +15,16 @@
  */
 package grails.plugins.contentbuffer
 
+import com.opensymphony.module.sitemesh.RequestConstants
+import groovy.transform.CompileStatic
 import org.codehaus.groovy.grails.web.pages.FastStringWriter
 import org.codehaus.groovy.grails.web.sitemesh.GSPSitemeshPage
 import org.codehaus.groovy.grails.web.util.GrailsPrintWriter
 import org.codehaus.groovy.grails.web.util.StreamCharBuffer
 
-class ContentBufferTagLib {
+class ContentBufferTagLib implements RequestConstants {
+
+    static final String GSP_SITEMESH_PAGE = 'org.codehaus.groovy.grails.web.sitemesh.GrailsLayoutView.GSP_SITEMESH_PAGE'
 
     def content = {attrs, body->
         if(! attrs.tag) {
@@ -51,20 +55,22 @@ class ContentBufferTagLib {
         return null
     }
 
-    protected getPage() {
-        return request[org.codehaus.groovy.grails.web.sitemesh.GrailsPageFilter.GSP_SITEMESH_PAGE]
+    @CompileStatic
+    protected Object getPage() {
+        request.getAttribute(GSP_SITEMESH_PAGE)
     }
 
-    protected wrapContentInBuffer(content) {
+    @CompileStatic
+    protected StreamCharBuffer wrapContentInBuffer(content) {
         if(content instanceof Closure) {
             content = content()
         }
-        if(!(content instanceof StreamCharBuffer)) {
-            // the body closure might be a string constant, so wrap it in a StreamCharBuffer in that case
-            def newbuffer = new FastStringWriter()
-            newbuffer.print(content)
-            content = newbuffer.buffer
+        if(content instanceof StreamCharBuffer) {
+            return (StreamCharBuffer)content
         }
-        return content
+        // the body closure might be a string constant, so wrap it in a StreamCharBuffer in that case
+        final FastStringWriter newbuffer = new FastStringWriter()
+        newbuffer.print(content)
+        return  newbuffer.buffer
     }
 }

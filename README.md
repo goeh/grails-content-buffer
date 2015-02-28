@@ -1,6 +1,6 @@
 #Content Buffer Plugin
 
-This plugin provide a taglib method called 'content'. It is used to insert page fragments anywhere in a GSP before it is rendered.
+This Grails plugin provide a taglib method called 'content'. It is used to insert page fragments anywhere in a GSP before it is rendered.
 The standard sitemesh content tag does not support appending content, this plugin does.
 Templates included with the render tag can also append content to sections in the layout.
 
@@ -51,3 +51,11 @@ The content-buffer plugin makes it possible to append as much content as you lik
 Then you let the layout render it to the final page.
 
 ---------------------------------------
+
+## Version history
+
+*1.0.2* Compatible with Grails 2.4.4
+
+*1.0.1* Compatible with Grails 2.2.4
+
+*1.0.0* Initial revision

@@ -22,3 +22,5 @@ log4j = {
 
     warn   'org.mortbay.log'
 }
+
+grails.views.gsp.sitemesh.preprocess = true
